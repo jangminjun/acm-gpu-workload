@@ -14,13 +14,19 @@ spec:
         app: gpu-burn
     spec:
       containers:
-      - name: gpu-burn
-        image: nvidia/samples:vectoradd-fortran # NVIDIA 공식 샘플
-        command: ["/bin/sh", "-c"]
-        args: ["/opt/nvidia/samples/vectorAdd_fortran; while true; do sleep 30; done"]
-        resources:
-          limits:
-            nvidia.com/gpu: 1
-          requests:
-            nvidia.com/gpu: 1
+        - name: cuda-container
+          image: 'nvidia/cuda:12.2.0-base-ubuntu22.04'
+          command:
+            - /bin/sh
+            - '-c'
+          args:
+            - nvidia-smi; while true; do sleep 30; done
+          resources:
+            limits:
+              nvidia.com/gpu: '1'
+            requests:
+              nvidia.com/gpu: '1'
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
       restartPolicy: Always
