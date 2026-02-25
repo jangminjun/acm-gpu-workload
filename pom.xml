@@ -86,6 +86,7 @@
                 <groupId>org.jboss.eap.plugins</groupId>
                 <artifactId>eap-maven-plugin</artifactId>
                 <version>1.0.1.Final-redhat-00022</version>
+                <!--
                 <configuration>
                     <channels>
                         <channel>
@@ -109,7 +110,9 @@
                     <layers>
                         <layer>jaxrs-server</layer>
                     </layers>
-                    <filename>ROOT.war</filename> </configuration>
+                    <filename>ROOT</filename> 
+                </configuration>
+                -->
                 <executions>
                     <execution>
                         <goals>
@@ -120,8 +123,15 @@
             </plugin>
         </plugins>
     </build>
-    <pluginRepositories>
-        </pluginRepositories>
+    
+        <repositories>
+  <repository>
+    <id>redhat-ga</id>
+    <name>Red Hat GA Repository</name>
+    <url>https://maven.repository.redhat.com/ga</url>
+  </repository>
+</repositories>
+       
     <profiles>
         <profile>
             <id>openshift</id>
